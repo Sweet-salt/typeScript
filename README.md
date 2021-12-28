@@ -33,8 +33,60 @@
 
 
 ## NEVER
-
 - never 타입은 모든 타입의 subtype 이며, 모든 타입에 할당 할 수 있습니다.
 - 하지만, never에는 그 어떤 것도 할당할 수 없다.
 - any 조차도 never 에게 할당 할 수 없다.
 - 잘못된 타입을 넣는 실수를 막고자 할 때 사용하기도 함.
+
+---------------------------------------
+## TypeScript Compiler
+
+### compileOnSave
+- true / false(default false)
+- who??
+    - visual studio 2015 with TypeScript 1.8.4 이상
+    - atom-typescript 플러그인
+
+### extends
+- 파일 (상대)경로명: string
+- TypeScript 2.1 New Spec
+
+### files, include exclude
+- 설정이 없으면 전부다 컴파일함
+
+#### files
+- 상대 혹은 절대 경로의 리스트 배열
+- exclude 보다 강함.
+
+#### include, exclude
+- glob 패턴 = .gitignore
+- include
+    - exclude 보다 약함
+    - * 갗은걸 사용하면 .ts / .tsx / .d.ts 만 include함 (allowJS)
+- exclude
+    - 설정 안하면 4가지 (node_modules, bower_components, jspm_packages, <outDir>)를 default함
+    - include에 있어도 <outDir>이건 항상 제외함
+
+
+## @types
+- TypeScript 2.0 부터 사용 가능한 내장 type definition 시스템
+- 아무 설정 안하면 -> node_modules/@types 라는 모든 경로 찾아 사용
+- typeRoots를 사용하면 -> 배열 안에 들어있는 경로들 아래서만 가져옴
+- types를 사용 -> 배열 안의 모듈 혹은 ./node_modules/@tpyes안의 모듈이름에서 찾아옴.
+- [] 빈 배열을 넣으면 이 시스템을 사용하지 않겠다는 것.
+- typeRoots와 types를 같이 사용하지 않음.
+
+## target & lib
+
+### target
+- 빌드의 결과물을 어떤 버전으로 사용할 것인가
+- 지정 없으면 es3
+
+### lib
+- 기본 type definition 라이브러리를 어떤 것을 사용할 것이냐
+- lib를 지정하지 않을 때,
+    - target 이 es3면 디폴트로 lib.d.ts를 사용
+    - target 이 es5면 디폴트로 dom, es5, scripthost를 사용
+    - target 이 es6면 디폴트로 dom, es6, dom.iterable, scripthost를 사용
+- lib를 지정하면 그 lib배열로만 라이브러리를 사용함
+ 
